@@ -11,3 +11,4 @@ namespace ariel {
     string mat(int cols, int rows, char ch, char ch2);
 }
 #endif //PRACTICE_MAT_HPP
+//dsada
