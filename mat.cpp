@@ -54,14 +54,14 @@ string ariel::mat(int cols, int rows, char ch, char ch2) {
 //        delete[] mat[p];
 //    }
 //    delete[] mat;
-    for (int i = 0; i < rows; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            std:cout<<mat[i][j];
-        }
+//    for (int i = 0; i < rows; ++i) {
+//        for (int j = 0; j < cols; ++j) {
+//            std:cout<<mat[i][j];
+//        }
+//
+//    }
 
-    }
-
-    return mat;
+    return "";
 }
 
 
