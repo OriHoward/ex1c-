@@ -61,12 +61,6 @@ TEST_CASE ("Bad output") {
             CHECK(mat(7, 1, '+', '-') != "-------");
 }
 
-TEST_CASE ("Bad input - must enter 2 different symbols") {
-    CHECK_THROWS(mat(3, 7, '-', '-'));
-    CHECK_THROWS(mat(7, 3, '@', '@'));
-    CHECK_THROWS(mat(5, 13, '+', '+'));
-}
-
 TEST_CASE ("Bad input - symbol can't be \\n") {
     CHECK_THROWS(mat(11, 17, '\n', '-'));
     CHECK_THROWS(mat(7, 3, '@', '\n'));
