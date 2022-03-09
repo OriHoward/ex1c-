@@ -4,11 +4,11 @@
 #include <vector>
 
 string ariel::mat(int cols, int rows, char firstSymbol, char secondSymbol) {
-//    if (!checkInput(cols, rows)) {
-//        throw "Bad input";
-//    }
-    if (cols == 1) { return handleSingleCol(rows, firstSymbol); };
-    if (rows == 1) { return handleSingleRow(cols, firstSymbol); };
+    if (!checkInput(cols, rows)) {
+        throw "Bad input";
+    }
+    if (cols == 1) { return handleSingleCol(rows, firstSymbol); }
+    if (rows == 1) { return handleSingleRow(cols, firstSymbol); }
 
     int colStartInd = 0;
     int colEndInd = cols - 1;
@@ -51,20 +51,24 @@ string ariel::buildStr(vector <vector<char>> rugMat, int cols, int rows) {
         for (int j = 0; j < cols; ++j) {
             ans += rugMat[i][j];
         }
-        ans += "\n";
+        if (i < rows - 1) {
+            ans += '\n';
+        }
     }
     return ans;
 }
 
 bool ariel::checkInput(int cols, int rows) {
-    return (cols % 2 == 0 || rows % 2 == 0 || cols < 0 || rows < 0);
+    return (cols % 2 == 0 || rows % 2 == 0 || cols < 0 || rows < 0
+            || cols == '\n' || cols == ' ' || cols == '\r' || cols == '\t'
+            || rows == '\n' || rows == ' ' || rows == '\r' || rows == '\t');
 }
 
 string ariel::handleSingleCol(int rows, char firstSymbol) {
     string ans;
     for (int i = 0; i < rows; ++i) {
         ans += firstSymbol;
-        if (i != rows - 1) {
+        if (i < rows - 1) {
             ans += "\n";
         }
     }
