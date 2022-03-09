@@ -1,146 +1,81 @@
 
 #include "mat.hpp"
-#include "string.h"
 #include <iostream>
+#include <vector>
 
-string ariel::mat(int cols, int rows, char ch, char ch2) {
-    return "";
+string ariel::mat(int cols, int rows, char firstSymbol, char secondSymbol) {
+//    if (!checkInput(cols, rows)) {
+//        throw "Bad input";
+//    }
+    if (cols == 1) { return handleSingleCol(rows, firstSymbol); };
+    if (rows == 1) { return handleSingleRow(cols, firstSymbol); };
+
+    int colStartInd = 0;
+    int colEndInd = cols - 1;
+    int rowStartInd = 0;
+    int rowEndInd = rows - 1;
+    char currentChar = secondSymbol;
+    vector <vector<char >> rugMat(rows, vector<char>(cols));
+    while (colStartInd < colEndInd && rowStartInd < rowEndInd) {
+        currentChar = (currentChar == firstSymbol) ? secondSymbol : firstSymbol;
+        for (int i = colStartInd; i <= colEndInd; ++i) {
+            rugMat[rowStartInd][i] = currentChar;
+            rugMat[rowEndInd][i] = currentChar;
+        }
+        for (int i = rowStartInd; i <= rowEndInd; ++i) {
+            rugMat[i][colStartInd] = currentChar;
+            rugMat[i][colEndInd] = currentChar;
+        }
+        colStartInd++;
+        colEndInd--;
+        rowStartInd++;
+        rowEndInd--;
+    }
+    currentChar = (currentChar == firstSymbol) ? secondSymbol : firstSymbol;
+    if (colStartInd < colEndInd) {
+        for (int i = colStartInd; i <= colEndInd; ++i) {
+            rugMat[rowStartInd][i] = currentChar;
+        }
+    }
+    if (rowStartInd < rowEndInd) {
+        for (int i = rowStartInd; i <= rowEndInd; ++i) {
+            rugMat[i][colStartInd] = currentChar;
+        }
+    }
+    return buildStr(rugMat, cols, rows);
 }
-//    if (cols % 2 == 0 || rows % 2 == 0 || cols < 0 || rows < 0 || ch == ch2) {
-//        throw "";
-//    }
-//    string ans = "";
-//    if (cols == 1) {
-//        for (int i = 0; i < rows; ++i) {
-//            ans += ch;
-//            if (i != rows - 1) {
-//                ans += "\n";
-//            }
-//        }
-//        return ans;
-//    }
-//    if (rows == 1) {
-//        for (int i = 0; i < cols; ++i) {
-//            ans += ch;
-//        }
-//        return ans;
-//    }
-//    char **mat = new char *[cols];
-//    for (int i = 0; i < cols; ++i) {
-//        mat[i] = new char[rows];
-//    }
-//    int colStartInd = 0;
-//    int colEndInd = cols - 1;
-//    int rowStartInd = 0;
-//    int rowEndInd = rows - 1;
-//
-//    createMat(cols, rows, ch, ch2, mat, colStartInd, colEndInd, rowStartInd, rowEndInd);
-//
-//    for (int i = 0; i < rows; ++i) {
-//        for (int j = 0; j < cols; ++j) {
-//            ans += mat[i][j];
-//        }
-//        ans += "\n";
-//    }
-//    for (int i = 0; i < cols; ++i) {
-//        delete[] mat[i];
-//    }
-//    delete[] mat;
-//
-//    return ans;
-//}
-//
-//
-//bool
-//ariel::createMat(int cols, int rows, char ch, char ch2, char **mat, int colStartInd, int colEndInd, int rowStartInd,
-//                 int rowEndInd) {
-//    if (colStartInd == colEndInd) {
-//        for (int i = rowStartInd; i <= rowEndInd; ++i) {
-//            mat[i][colStartInd] = ch;
-//        }
-//        return true;
-//    }
-//    if (rowStartInd == rowEndInd) {
-//        for (int i = colStartInd; i <= colEndInd; ++i) {
-//            mat[rowStartInd][i] = ch;
-//        }
-//        return true;
-//    }
-//    for (int i = colStartInd; i <= colEndInd; ++i) {
-//        mat[rowStartInd][i] = ch;
-//        mat[rowEndInd][i] = ch;
-//    }
-//    for (int i = rowStartInd; i <= rowEndInd; ++i) {
-//        mat[i][colStartInd] = ch;
-//        mat[i][colEndInd] = ch;
-//    }
-//    colStartInd += 1;
-//    colEndInd -= 1;
-//    rowStartInd += 1;
-//    rowEndInd -= 1;
-//    return createMat(cols, rows, ch2, ch, mat, colStartInd, colEndInd, rowStartInd, rowEndInd);
-//}
 
-//char ariel::swap(char currentChar, char ch, char ch2) {
-//    if (currentChar == ch) {
-//        currentChar = ch2;
-//    } else {
-//        currentChar = ch;
-//    }
-//    return currentChar;
-//}
-//
-//string ariel::mat(int cols, int rows, char ch, char ch2) {
-//    if (cols % 2 == 0 || rows % 2 == 0) {
-//        throw "Mat size is always odd";
-//    }
-//    if (cols < 0 || rows < 0) {
-//        throw "col and rows must be positive numbers";
-//    }
-//    int colStartInd = 0;
-//    int colEndInd = cols - 1;
-//    int rowStartInd = 0;
-//    int rowEndInd = rows - 1;
-//
-//    char currentChar = ' ';
-//    char **mat = new char *[cols];
-//    for (int i = 0; i < cols; ++i) {
-//        mat[i] = new char[rows];
-//    }
-//    while (colStartInd < colEndInd && rowStartInd < rowEndInd) {
-//        swap(currentChar, ch, ch2);
-//        for (int i = colStartInd; i <= colEndInd; ++i) {
-//            mat[rowStartInd][i] = currentChar;
-//            mat[rowEndInd][i] = currentChar;
-//        }
-//        for (int i = rowStartInd; i <= rowEndInd; ++i) {
-//            mat[i][colStartInd] = currentChar;
-//            mat[i][colEndInd] = currentChar;
-//        }
-//        colStartInd++;
-//        colEndInd--;
-//        rowStartInd++;
-//        rowEndInd--;
-//    }
-//    if (colStartInd < colEndInd) {
-//        for (int i = colStartInd; i <= colEndInd; ++i) {
-//            mat[rowStartInd][i] = currentChar;
-//        }
-//    } else if (rowStartInd < rowEndInd) {
-//        for (int i = rowStartInd; i <= rowEndInd; ++i) {
-//            mat[i][colStartInd] = currentChar;
-//        }
-//    }
-//    string ans = "";
-//    for (int i = 0; i < rows; ++i) {
-//        for (int j = 0; j < cols; ++j) {
-//            ans += mat[i][j];
-//        }
-//        ans += "\n";
-//    }
-//    for (int i = 0; i < cols; ++i) {
-//        delete[] mat[i];
-//    }
-//    delete[] mat;
-//    return ans;
-//}
+string ariel::buildStr(vector <vector<char>> rugMat, int cols, int rows) {
+    string ans;
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            ans += rugMat[i][j];
+        }
+        ans += "\n";
+    }
+    return ans;
+}
+
+bool ariel::checkInput(int cols, int rows) {
+    return (cols % 2 == 0 || rows % 2 == 0 || cols < 0 || rows < 0);
+}
+
+string ariel::handleSingleCol(int rows, char firstSymbol) {
+    string ans;
+    for (int i = 0; i < rows; ++i) {
+        ans += firstSymbol;
+        if (i != rows - 1) {
+            ans += "\n";
+        }
+    }
+    return ans;
+
+}
+
+string ariel::handleSingleRow(int cols, char firstSymbol) {
+    string ans;
+    for (int i = 0; i < cols; ++i) {
+        ans += firstSymbol;
+    }
+    return ans;
+}

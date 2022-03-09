@@ -3,16 +3,20 @@
 
 #include <iostream>
 #include <stdexcept>
-#include "string.h"
+#include <vector>
 
 using namespace std;
 
 namespace ariel {
     string mat(int, int, char, char);
 
-//    bool createMat(int cols, int rows, char ch, char ch2, char **mat, int colStartInd, int colEndInd, int rowStartInd,
-//                     int rowEndInd);
-//    char swap(char, char, char);
+    string buildStr(vector <vector<char>>, int, int);
+
+    string handleSingleCol(int, char);
+
+    string handleSingleRow(int, char);
+
+    bool checkInput(int, int);
 }
 #endif //PRACTICE_MAT_HPP
 //dsada
