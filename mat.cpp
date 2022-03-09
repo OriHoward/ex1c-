@@ -5,9 +5,9 @@
 #include <vector>
 
 string ariel::mat(int cols, int rows, char firstSymbol, char secondSymbol) {
-//    if (checkInput(cols, rows)) {
-//        throw std::invalid_argument("Bad input");
-//    }
+    if (checkInput(cols, rows, firstSymbol, secondSymbol)) {
+        throw std::invalid_argument("Bad input");
+    }
     if (cols == 1) { return handleSingleCol(rows, firstSymbol); }
     if (rows == 1) { return handleSingleRow(cols, firstSymbol); }
 
@@ -16,7 +16,7 @@ string ariel::mat(int cols, int rows, char firstSymbol, char secondSymbol) {
     int rowStartInd = 0;
     int rowEndInd = rows - 1;
     char currentChar = secondSymbol;
-    vector <vector<char >> rugMat(rows, vector<char>(cols));
+    vector<vector<char >> rugMat(rows, vector<char>(cols));
     while (colStartInd < colEndInd && rowStartInd < rowEndInd) {
         currentChar = (currentChar == firstSymbol) ? secondSymbol : firstSymbol;
         for (int i = colStartInd; i <= colEndInd; ++i) {
@@ -37,16 +37,17 @@ string ariel::mat(int cols, int rows, char firstSymbol, char secondSymbol) {
         for (int i = colStartInd; i <= colEndInd; ++i) {
             rugMat[rowStartInd][i] = currentChar;
         }
-    }
-    if (rowStartInd < rowEndInd) {
+    } else if (rowStartInd < rowEndInd) {
         for (int i = rowStartInd; i <= rowEndInd; ++i) {
             rugMat[i][colStartInd] = currentChar;
         }
+    } else {
+        rugMat[rowStartInd][colStartInd] = currentChar;
     }
     return buildStr(rugMat, cols, rows);
 }
 
-string ariel::buildStr(vector <vector<char>> rugMat, int cols, int rows) {
+string ariel::buildStr(vector<vector<char>> rugMat, int cols, int rows) {
     string ans;
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
@@ -59,10 +60,10 @@ string ariel::buildStr(vector <vector<char>> rugMat, int cols, int rows) {
     return ans;
 }
 
-bool ariel::checkInput(int cols, int rows) {
+bool ariel::checkInput(int cols, int rows, char firstSymbol, char secondSymbol) {
     return (cols % 2 == 0 || rows % 2 == 0 || cols < 0 || rows < 0
-            || cols == '\n' || cols == ' ' || cols == '\r' || cols == '\t'
-            || rows == '\n' || rows == ' ' || rows == '\r' || rows == '\t');
+            || bool(isspace(firstSymbol)) || bool(isspace(secondSymbol)) || firstSymbol == '\0' ||
+            secondSymbol == '\0');
 }
 
 string ariel::handleSingleCol(int rows, char firstSymbol) {
