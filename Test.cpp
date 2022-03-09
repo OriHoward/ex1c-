@@ -1,5 +1,4 @@
 #include "mat.hpp"
-#include <string>
 #include <algorithm>
 #include "doctest.h"
 
@@ -51,16 +50,7 @@ TEST_CASE ("Bad output") {
 TEST_CASE ("Good output") {
             CHECK(mat(3, 1, '@', '#') == "@@@");
             CHECK(mat(1, 3, '%', '-') == "%\n%\n%");
-            CHECK_EQ(mat(9, 7, '@', '-'), "@@@@@@@@@\n"
-                                          "@-------@\n"
-                                          "@-@@@@@-@\n"
-                                          "@-@---@-@\n"
-                                          "@-@@@@@-@\n"
-                                          "@-------@\n"
-                                          "@@@@@@@@@");
-}
-
-TEST_CASE ("Good output") {
+            CHECK_EQ(mat(1, 1, '+', '-'), "+");
             CHECK_EQ(mat(9, 7, '#', '-'), "#########\n"
                                           "#-------#\n"
                                           "#-#####-#\n"
@@ -75,7 +65,16 @@ TEST_CASE ("Good output") {
                                           "%%%%%%%\n"
                                           "%%%%%%%\n"
                                           "%%%%%%%");
+            CHECK_EQ(mat(9, 7, '@', '-'), "@@@@@@@@@\n"
+                                          "@-------@\n"
+                                          "@-@@@@@-@\n"
+                                          "@-@---@-@\n"
+                                          "@-@@@@@-@\n"
+                                          "@-------@\n"
+                                          "@@@@@@@@@");
+
 }
+
 
 TEST_CASE ("Bad input - symbol can't be \\n") {
             CHECK_THROWS(mat(11, 17, '\n', '-'));
@@ -101,11 +100,13 @@ TEST_CASE ("Bad input - symbol can't be \\t") {
             CHECK_THROWS(mat(5, 13, '\t', '\t'));
 }
 
-TEST_CASE ("") {
+TEST_CASE ("Bad input - symbol can't be \\0") {
             CHECK_THROWS(mat(11, 17, '\0', '-'));
             CHECK_THROWS(mat(11, 17, '\0', '\0'));
             CHECK_THROWS(mat(11, 17, '^', '\0'));
 }
+
+
 
 
 
