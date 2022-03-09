@@ -1,12 +1,13 @@
 
 #include "mat.hpp"
 #include <iostream>
+#include <stdexcept>
 #include <vector>
 
 string ariel::mat(int cols, int rows, char firstSymbol, char secondSymbol) {
-    if (!checkInput(cols, rows)) {
-        throw "Bad input";
-    }
+//    if (checkInput(cols, rows)) {
+//        throw std::invalid_argument("Bad input");
+//    }
     if (cols == 1) { return handleSingleCol(rows, firstSymbol); }
     if (rows == 1) { return handleSingleRow(cols, firstSymbol); }
 
