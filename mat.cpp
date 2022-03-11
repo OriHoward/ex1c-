@@ -62,8 +62,7 @@ string ariel::buildStr(vector<vector<char>> rugMat, int cols, int rows) {
 
 bool ariel::checkInput(int cols, int rows, char firstSymbol, char secondSymbol) {
     return (cols % 2 == 0 || rows % 2 == 0 || cols < 0 || rows < 0
-            || bool(isspace(firstSymbol)) || bool(isspace(secondSymbol)) || firstSymbol == '\0' ||
-            secondSymbol == '\0');
+            || firstSymbol < 33 || firstSymbol > 126 || secondSymbol < 33 || secondSymbol > 126);
 }
 
 string ariel::handleSingleCol(int rows, char firstSymbol) {
