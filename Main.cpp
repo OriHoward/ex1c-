@@ -66,6 +66,10 @@ int main() {
     cin >> firstSymbol >> secondSymbol;
     cout << "Here is your rug, thanks for buying!" << endl;
     cout << "--------------" << endl;
-    cout << mat(cols, rows, '%', '^') << endl;
+    try {
+        cout << mat(cols, rows, '%', '^') << endl;
+    } catch (exception &ex) {
+        cout << "   caught exception: " << ex.what() << endl;
+    }
     cout << "--------------" << endl;
 }
