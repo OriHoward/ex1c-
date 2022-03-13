@@ -1,11 +1,27 @@
 #include "mat.hpp"
 #include <iostream>
 #include <stdexcept>
+#include <vector>
 
 using namespace std;
 using namespace ariel;
 
 int main() {
+    // random rug generator
+//    vector<char> symbols(94);
+//    for (int j = 0, i = 33; i < 127; ++i, j++) {
+//        symbols[j] = i;
+//    }
+//    int firstSymbolInd = rand() % 94;
+//    int secondSymbolInd = rand() % 94;
+//    cout << mat(13, 13, symbols[firstSymbolInd], symbols[secondSymbolInd]) << endl;
+//    cout << "````````````````````````````````````````" << endl;
+
+    for (int i = 0; i < 256; ++i) {
+        if (!isprint(i) || isspace(i)) {
+            cout << i << endl;
+        }
+    }
     cout << "Welcome to the rug shop !" << endl;
     int cols, rows;
     char firstSymbol, secondSymbol;
