@@ -17,6 +17,8 @@ namespace ariel {
     string handleSingleRow(int, char);
 
     bool checkInput(int, int, char, char);
+
+
 }
 #endif //PRACTICE_MAT_HPP
 //dsada
