@@ -30,9 +30,9 @@ int main() {
 @-----------@
 @@@@@@@@@@@@@
 */
-//    try {
-//        cout << ariel::mat(10, 5, '$', '%') << endl; // Exception - not a valid code
-//    } catch (exception &ex) {
-//        cout << "   caught exception: " << ex.what() << endl;  // should print "Mat size is always odd"
-//    }
+    try {
+        cout << ariel::mat(10, 5, '$', '%') << endl; // Exception - not a valid code
+    } catch (exception &ex) {
+        cout << "   caught exception: " << ex.what() << endl;  // should print "Mat size is always odd"
+    }
 }
